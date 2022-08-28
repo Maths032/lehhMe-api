@@ -20,6 +20,7 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+// Rota para listar livros
+Route.get('/books', 'BooksController.list').as('Retorna uma lista de livros.')
+
+// Route.get('/books', 'BooksController.list').as('Retorna uma lista de livros.')
