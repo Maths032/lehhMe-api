@@ -25,7 +25,7 @@ export default class Book extends BaseModel {
   public resume: string
 
   @column()
-  public ratings: Object
+  public ratings: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -48,17 +48,16 @@ export default class Book extends BaseModel {
         const books = await Book.query().where('genreId', 'LIKE', `%${genreId ? genreId : ''}%`)
 
         resolve(
-          // books.map((v) => {
-          //   return {
-          //     poster: v.poster,
-          //     year: v.year,
-          //     title: v.title,
-          //     resume: v.resume,
-          //     ratings: JSON.parse(`${v.ratings}`),
-          //     bookId: v.bookId,
-          //   }
-          // })
-          books
+          books.map((v) => {
+            const returnObject = v
+
+            returnObject.ratings = JSON.parse(
+              v.ratings.slice(1, v.ratings.length - 1).replace(/\'/g, '"')
+            )
+
+            return returnObject
+          })
+          // books
         )
       } catch (error) {
         reject(error)

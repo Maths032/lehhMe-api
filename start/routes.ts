@@ -23,4 +23,5 @@ import Route from '@ioc:Adonis/Core/Route'
 // Rota para listar livros
 Route.get('/books', 'BooksController.list').as('Retorna uma lista de livros.')
 
-// Route.get('/books', 'BooksController.list').as('Retorna uma lista de livros.')
+// Rota para listar gêneros
+Route.get('/genres', 'GenresController.list').as('Retorna uma lista de gêneros.')

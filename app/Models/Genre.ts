@@ -29,4 +29,16 @@ export default class Genre extends BaseModel {
     }
     // }
   }
+
+  public static async filterGenres({ genreId }: { genreId?: number }) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const genres = await Genre.query().where('genreId', 'LIKE', `%${genreId ? genreId : ''}%`)
+
+        resolve(genres)
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 }
